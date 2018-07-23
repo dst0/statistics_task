@@ -1,5 +1,7 @@
 package com.task.stats.model;
 
+import java.util.Objects;
+
 public class StatisticTimeUnit {
 
     private long count;
@@ -21,6 +23,23 @@ public class StatisticTimeUnit {
         setCount(value.getCount());
         setSum(value.getSum());
         setTime(value.getTime());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StatisticTimeUnit that = (StatisticTimeUnit) o;
+        return getCount() == that.getCount() &&
+                Double.compare(that.getSum(), getSum()) == 0 &&
+                unitTime == that.unitTime &&
+                Objects.equals(getMax(), that.getMax()) &&
+                Objects.equals(getMin(), that.getMin());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCount(), getMax(), getMin(), getSum(), unitTime);
     }
 
     public long getCount() {
